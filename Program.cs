@@ -1,4 +1,4 @@
-using EmailSenderAPI.Services.EmailService;
+using EmailSenderAPI.Services.Email;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,12 +8,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "EmailSenderAPI",
-        Version = "v1",
-        Description = "Email sending API"
-    });
+	c.SwaggerDoc("v1", new OpenApiInfo
+	{
+		Title = "EmailSenderAPI",
+		Version = "v1",
+		Description = "Email sending API"
+	});
 });
 
 // Register custom services
@@ -25,9 +25,9 @@ var app = builder.Build();
 // ------ Middleware Pipeline ------
 if (app.Environment.IsDevelopment())
 {
-    // Enable Swagger only in Development
-    app.UseSwagger();
-    app.UseSwaggerUI(); // Default endpoint: /swagger
+	// Enable Swagger only in Development
+	app.UseSwagger();
+	app.UseSwaggerUI(); // Default endpoint: /swagger
 }
 
 app.UseHttpsRedirection();

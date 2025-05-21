@@ -1,6 +1,6 @@
 ﻿using EmailSenderAPI.Models;
 
-namespace EmailSenderAPI.Services.EmailService
+namespace EmailSenderAPI.Services.Email
 {
     public interface IEmailService
     {

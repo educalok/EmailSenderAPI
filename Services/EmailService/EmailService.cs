@@ -5,7 +5,7 @@ using MimeKit.Text;
 using EmailSenderAPI.Models;
 using Microsoft.Extensions.Logging;
 
-namespace EmailSenderAPI.Services.EmailService
+namespace EmailSenderAPI.Services.Email
 {
     public class EmailService(IConfiguration config, ILogger<EmailService> logger) : IEmailService
     {
@@ -78,13 +78,13 @@ namespace EmailSenderAPI.Services.EmailService
             using var smtp = new SmtpClient();
 
             var host = _config["EmailHost"];
-            var port = _config.GetValue<int>("Port");
+            var portString = _config["Port"];
             var username = _config["EmailUsername"];
             var password = _config["EmailPassword"];
 
             if (string.IsNullOrWhiteSpace(host))
                 throw new InvalidOperationException("EmailHost configuration is missing");
-            if (port <= 0)
+            if (!int.TryParse(portString, out var port) || port <= 0)
                 throw new InvalidOperationException("Invalid Port configuration");
             if (string.IsNullOrWhiteSpace(username))
                 throw new InvalidOperationException("EmailUsername configuration is missing");
