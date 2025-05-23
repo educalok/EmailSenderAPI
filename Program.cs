@@ -22,14 +22,8 @@ builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
-// ------ Middleware Pipeline ------
-if (app.Environment.IsDevelopment())
-{
-	// Enable Swagger only in Development
-	app.UseSwagger();
-	app.UseSwaggerUI(); // Default endpoint: /swagger
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
